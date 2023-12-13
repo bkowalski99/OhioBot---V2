@@ -35,7 +35,7 @@ def checkForUser(collection, name):
     if document:
         return(document["count"])
     else:
-        return ""
+        return 0
 
 def insertOrUpdateUserCollection(collection, name):
 
