@@ -17,6 +17,7 @@ print(uri)
 cryingEmoji =  r"C:\Users\bkowa\Documents\Python Code\OhioBot - V2\OhioBot---V2\discordBotCode\crying-emoji-dies.gif"
 intents = discord.Intents.default()
 intents.message_content = True
+jaredHate = False
 
 bot = commands.Bot(command_prefix='$', intents=intents)
 
@@ -131,7 +132,7 @@ async def on_message(message):
     if (len(text) == 0):
         return
 
-    if message.author.name == "jwalk427":
+    if jaredHate and message.author.name == "jwalk427":
         try:
             await message.channel.send(uwuize(message.content))
         except:
