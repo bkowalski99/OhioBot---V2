@@ -9,6 +9,7 @@ Functionality:
 Featuring:
 * A brand new MongoDB Implementation!
 * Discord API to connect to a DB
+* Currently running on a GCP Compute Engine!
 
 Next Steps:
 * Introducing shell method to allow for the bot to be stopped, updated, and started
