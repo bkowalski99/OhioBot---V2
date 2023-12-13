@@ -18,18 +18,22 @@ cryingEmoji =  r"home\bkowalski99\ohiobot\OhioBot---V2\discordBotCode\crying-emo
 intents = discord.Intents.default()
 intents.message_content = True
 jaredHate = False
+sentimentPermitted = False
 
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 client = discord.Client(intents=intents)
 
 def areTheyBeingMean(text):
-    blob = TextBlob(text)
+    if sentimentPermitted:
+        blob = TextBlob(text)
 
-    sentiment_polarity = blob.sentiment.polarity
+        sentiment_polarity = blob.sentiment.polarity
 
-    return sentiment_polarity
-        
+
+        return sentiment_polarity
+    else:
+        return 0.0        
 
 def uwuize(text):
     msg = ''
