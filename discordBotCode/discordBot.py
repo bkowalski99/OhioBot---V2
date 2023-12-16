@@ -113,6 +113,8 @@ async def on_ready():
 @client.event
 async def on_message(message):
     
+    global jaredHate
+    global sentimentPermitted
     if message.author == client.user:
         return
 
@@ -121,9 +123,9 @@ async def on_message(message):
     
     
     sentiment = areTheyBeingMean(message.content.lower())
-    if (sentiment < -0.5):
+    if (sentiment < -0.5 and message.author.name == "conchiliga2"):
         await message.channel.send("Hey "+ message.author.name +", consider slowing down, your words can hurt people... :(")
-    elif (sentiment > 0.5):
+    elif (sentiment > 0.5 and message.author.name == "conchiliga2"):
         await message.channel.send("DICKKKKKK RIDAAAAAAA")
 
     # Update count of messages in DB
@@ -136,37 +138,47 @@ async def on_message(message):
     if (len(text) == 0):
         return
 
-    if jaredHate and message.author.name == "jwalk427":
-        try:
-            await message.channel.send(uwuize(message.content))
-        except:
-            error_occurred()
+    # bot control methods
+    if '$sentiment' in message.content.lower():
+        sentimentOn = not sentimentOn
+        await message.channel.send("Sentiment set to "+str(sentimentOn))
+
+    if '$jaredhate' in message.content.lower():
+        jaredHate = not jaredHate
+        await message.channel.send("JaredHate set to "+str(jaredHate))
+
+    if '$close' in text and message.author.name == "bearington.":
+        await message.channel.send("Shutting down...")
+        print("attempting shutdown")
+        await bot.logout()
+        sys.exit()
+        return
+    
+    if '$help' in text:
+        await message.channel.send('''**$count** will tell you how many times we've pinged csgamer\n **$messages** will tell you how many messages everyone has sent
+        ''')
+
+    if '$$member' in text:
+        await message.channel.send((message.author.id))
+        return
+
+    if '$count' in text:        
+            count = get_pings_count()
+            await message.channel.send(count)
 
 
+    if '$messages' in message.content.lower():        
+            count = get_messages_count()
+            await message.channel.send(count)
+
+
+    # bot response methods
     if 'ohio' in text:
         await message.channel.send('I love Ohio! 🎉')
     
     if 'california' in text:
         await message.channel.send('Fuck California. 😠')
 
-    if '$$updateCode' in text:
-        #end this python command to jump up to updater section
-        return
-    
-    if '$$member' in text:
-        await message.channel.send((message.author.id))
-        return
-
-    if '$count' in text:        
-
-            count = get_pings_count()
-            await message.channel.send(count)
-
-
-    if '$messages' in message.content.lower():        
-
-            count = get_messages_count()
-            await message.channel.send(count)
 
     if ' est' in message.content.lower():
         text = message.content.lower()
@@ -174,6 +186,11 @@ async def on_message(message):
         value = convert_to_pst(text)
         await message.channel.send("That's " + str(value) + " PST")
         
+    if jaredHate and message.author.name == "jwalk427":
+        try:
+            await message.channel.send(uwuize(message.content))
+        except:
+            error_occurred()
 
     if ' pst' in message.content.lower():
         with open(cryingEmoji, 'rb') as f:
@@ -196,10 +213,6 @@ async def on_message(message):
     if '$help' in text:
         await message.channel.send('''**$count** will tell you how many times we've pinged csgamer\n **$messages** will tell you how many messages everyone has sent
         ''')
-    
-    if '$$close' in text:
-        await client.close() 
-        sys.exit()
 
 
 
