@@ -18,19 +18,16 @@ cryingEmoji =  r"home\bkowalski99\ohiobot\OhioBot---V2\discordBotCode\crying-emo
 intents = discord.Intents.default()
 intents.message_content = True
 jaredHate = False
-sentimentPermitted = False
+sentimentOn = False
 
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 client = discord.Client(intents=intents)
 
-def areTheyBeingMean(text):
-    if sentimentPermitted:
+def areTheyBeingMean(text, sentimentOn):
+    if sentimentOn:
         blob = TextBlob(text)
-
         sentiment_polarity = blob.sentiment.polarity
-
-
         return sentiment_polarity
     else:
         return 0.0        
@@ -114,15 +111,12 @@ async def on_ready():
 async def on_message(message):
     
     global jaredHate
-    global sentimentPermitted
+    global sentimentOn
     if message.author == client.user:
         return
 
     text = message.content.lower()
-    
-    
-    
-    sentiment = areTheyBeingMean(message.content.lower())
+    sentiment = areTheyBeingMean(message.content.lower(), sentimentOn)
     if (sentiment < -0.5 and message.author.name == "conchiliga2"):
         await message.channel.send("Hey "+ message.author.name +", consider slowing down, your words can hurt people... :(")
     elif (sentiment > 0.5 and message.author.name == "conchiliga2"):
