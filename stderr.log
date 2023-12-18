@@ -1,0 +1,6 @@
+nohup: ignoring input
+[2023-12-18 04:24:50] [INFO    ] discord.client: logging in using static token
+[2023-12-18 04:24:50] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: f6a4a8da781275771fe6d37f1e9cdce0).
+Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x7fed2cf8e220>, 734.43019044)]']
+connector: <aiohttp.connector.TCPConnector object at 0x7fed2cf7d490>
