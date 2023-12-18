@@ -11,21 +11,21 @@ from textblob import TextBlob
 import time
 
 #consts
-reader = open(r"home\bkowalski99\ohiobot\OhioBot---V2\discordBotCode\SecretKeyURI.txt", "r") #open(/home/bkowalski99/ohiobot/OhioBot---V2/discordBotCode/SecretKeyURI.txt","r")
+reader = open("/home/bkowalski99/ohiobot/discordBotCode/SecretKeyURI.txt","r")
 uri = reader.readline()
 print(uri)
-cryingEmoji =  r"home\bkowalski99\ohiobot\OhioBot---V2\discordBotCode\crying-emoji-dies.gif" # "/home/bkowalski99/ohiobot/OhioBot---V2/discordBotCode/crying-emoji-dies.gif"
+cryingEmoji = "/home/bkowalski99/ohiobot/discordBotCode/crying-emoji-dies.gif"
 intents = discord.Intents.default()
 intents.message_content = True
 jaredHate = False
-sentimentPermitted = False
+sentimentOn = False
 
 bot = commands.Bot(command_prefix='$', intents=intents)
 
 client = discord.Client(intents=intents)
 
 def areTheyBeingMean(text):
-    if sentimentPermitted:
+    if sentimentOn:
         blob = TextBlob(text)
 
         sentiment_polarity = blob.sentiment.polarity
@@ -114,7 +114,9 @@ async def on_ready():
 async def on_message(message):
     
     global jaredHate
-    global sentimentPermitted
+    global sentimentOn
+    global bot
+    global client
     if message.author == client.user:
         return
 
@@ -150,7 +152,7 @@ async def on_message(message):
     if '$close' in text and message.author.name == "bearington.":
         await message.channel.send("Shutting down...")
         print("attempting shutdown")
-        await bot.logout()
+        await client.close()
         sys.exit()
         return
     
@@ -217,7 +219,7 @@ async def on_message(message):
 
 
 def start():
-    key = '' 
-    reader = open(r"C:\Users\bkowa\Documents\Python Code\OhioBot - V2\OhioBot---V2\discordBotCode\SecretKey.txt", "r") # open("/home/bkowalski99/ohiobot/OhioBot---V2/discordBotCode/SecretKey.txt","r")
+    key = ''
+    reader = open("/home/bkowalski99/ohiobot/discordBotCode/SecretKey.txt","r")
     key = reader.readline()
     client.run(key)
