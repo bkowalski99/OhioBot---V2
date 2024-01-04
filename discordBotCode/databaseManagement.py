@@ -7,7 +7,7 @@ class Ping():
 
 
 
-# Connects to the SQLite3 database
+# Connects to the Mongo database
 def getCollection(uri, name):
     client = MongoClient(uri, server_api = ServerApi("1"))
     db = client["HHGInfo"]
@@ -15,7 +15,7 @@ def getCollection(uri, name):
 
     return collection
 
-# Inserts the SQLite3 Database appropriately
+# Inserts document into Mongo Database appropriately
 def create_document(collection, ping):
     new_ping = {
         "name": ping.name,
