@@ -54,6 +54,7 @@ def print_collection(collection):
     
     cursor = collection.find()
     rows = []
+    #update to sort by count
     for document in cursor:
         print(document)
         rows.append(document)
