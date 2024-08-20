@@ -10,11 +10,13 @@ import re
 from textblob import TextBlob
 import time
 
+
 #consts
-reader = open("/home/bkowalski99/ohiobot/discordBotCode/SecretKeyURI.txt","r")
+reader = open("/root/config/python_scripts/ohioBot/OhioBot---V2/discordBotCode/SecretKeyURI.txt","r")
 uri = reader.readline()
 print(uri)
-cryingEmoji = "/home/bkowalski99/ohiobot/discordBotCode/crying-emoji-dies.gif"
+cryingEmoji = "/root/config/python_scripts/ohioBot/OhioBot---V2/discordBotCode/crying-emoji-dies.gif"
+
 intents = discord.Intents.default()
 intents.message_content = True
 jaredHate = False
@@ -220,6 +222,6 @@ async def on_message(message):
 
 def start():
     key = ''
-    reader = open("/home/bkowalski99/ohiobot/discordBotCode/SecretKey.txt","r")
+    reader = open("/root/config/python_scripts/ohioBot/OhioBot---V2/discordBotCode/SecretKey.txt","r")
     key = reader.readline()
     client.run(key)
