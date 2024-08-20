@@ -1,3 +1,4 @@
+import pymongo
 from pymongo.server_api import ServerApi
 from pymongo.mongo_client import MongoClient
 
@@ -52,7 +53,8 @@ def insertOrUpdateUserCollection(collection, name):
 
 def print_collection(collection):
     
-    cursor = collection.find()
+    cursor = collection.find().sort("count",pymongo.DESCENDING)
+    #collection.sort("count", pymongo.DESCENDING)
     rows = []
     #update to sort by count
     for document in cursor:
